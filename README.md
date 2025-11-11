@@ -12,5 +12,8 @@ JumpGame is a fast-paced 2D platformer where timing and precision are everything
 <img width="200" height="200" alt="New Piskel" src="https://github.com/user-attachments/assets/3ca1057a-cd5c-4e0f-bfcb-e33e0ec546c5" />
 
 Downloads:
-
+* [Windows EXE]()
+* [Mac App]()
+* [Linux Executable]()
+* [Source Code]()
 
