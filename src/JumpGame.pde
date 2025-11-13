@@ -1,22 +1,17 @@
 // JumpGame.pde (main game file) - instantiate every class to check connections
 Player player;
 ArrayList<Platform> platforms;
-ArrayList<Enemy> enemies;
 
 void setup() {
   size(800, 600);
   // instantiate
   player = new Player(100, 400);
   platforms = new ArrayList<Platform>();
-  enemies = new ArrayList<Enemy>();
 
   // example platforms to test interactions
   platforms.add(new Platform(50, 500, 200, 16));
   platforms.add(new Platform(300, 420, 160, 16));
   platforms.add(new Platform(520, 360, 180, 16));
-
-  // example enemy
-  enemies.add(new Enemy(400, 360));
 }
 
 void draw() {
@@ -26,35 +21,22 @@ void draw() {
   for (Platform p : platforms) {
     p.display();
   }
-
-  // simple physics and movement for player
-  player.applyGravity();
-  player.checkPlatforms(platforms);
   player.move();
   player.display();
-
-  // update & draw enemies
-  for (Enemy e : enemies) {
-    e.move();
-    e.display();
-  }
 
   // basic HUD
   fill(0);
   textSize(12);
   text("Use LEFT/RIGHT arrows and SPACE to jump", 10, 20);
-}
 
-void keyPressed() {
-  if (key == ' ' || key == 'w') {
-    player.jump();
-  }
-  if (keyCode == LEFT) {
+    if (keyCode == LEFT) {
     player.vx = -4;
   } else if (keyCode == RIGHT) {
     player.vx = 4;
   }
 }
+}
+
 
 void keyReleased() {
   if (keyCode == LEFT || keyCode == RIGHT) {
