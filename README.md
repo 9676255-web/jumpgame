@@ -2,6 +2,7 @@ JUMPGAME
 
 Team Members:
 Xadian Butcher, the artist and leader, responsible for all the images and backgrounds.
+
 Joey Zheng, the designer and coder, responsible for the game’s code, layout, and overall feel.
 
 Game Description
