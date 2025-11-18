@@ -1,45 +1,57 @@
-// JumpGame.pde (main game file) - instantiate every class to check connections
-Player player;
-ArrayList<Platform> platforms;
+int W = 800;
+int H = 400;
+
+String state = "start"; // "start", "playing", "gameover"
 
 void setup() {
-  size(800, 600);
-  // instantiate
-  player = new Player(100, 400);
-  platforms = new ArrayList<Platform>();
-
-  // example platforms to test interactions
-  platforms.add(new Platform(50, 500, 200, 16));
-  platforms.add(new Platform(300, 420, 160, 16));
-  platforms.add(new Platform(520, 360, 180, 16));
+  size(W, H);
+  textAlign(CENTER, CENTER);
+  rectMode(CORNER);
+  ellipseMode(CENTER);
+  smooth();
+  groundY = height - 60; // declared in Game.pde
+  resetGame();
 }
 
 void draw() {
-  background(200);
-
-  // update & display platforms
-  for (Platform p : platforms) {
-    p.display();
-  }
-  player.move();
-  player.display();
-
-  // basic HUD
-  fill(0);
-  textSize(12);
-  text("Use LEFT/RIGHT arrows and SPACE to jump", 10, 20);
-
-    if (keyCode == LEFT) {
-    player.vx = -4;
-  } else if (keyCode == RIGHT) {
-    player.vx = 4;
+  background(80, 180, 230);
+  if (state.equals("start")) {
+    drawStartScreen();
+  } else if (state.equals("playing")) {
+    updateGame();
+    drawGame();
+  } else if (state.equals("gameover")) {
+    drawGameOver();
   }
 }
+
+void keyPressed() {
+  if (state.equals("start")) {
+    if (key == ' ' || keyCode == UP) {
+      state = "playing";
+    }
+  } else if (state.equals("playing")) {
+    if (key == ' ' || keyCode == UP) {
+      player.jump();
+    }
+  } else if (state.equals("gameover")) {
+    if (key == 'r' || key == 'R') {
+      resetGame();
+      state = "playing";
+    } else if (key == ' ' || keyCode == UP) {
+      state = "start";
+      resetGame();
+    }
+  }
 }
 
-
-void keyReleased() {
-  if (keyCode == LEFT || keyCode == RIGHT) {
-    player.vx = 0;
+void mousePressed() {
+  if (state.equals("start")) {
+    state = "playing";
+  } else if (state.equals("playing")) {
+    player.jump();
+  } else if (state.equals("gameover")) {
+    resetGame();
+    state = "playing";
   }
 }
