@@ -1,0 +1,48 @@
+class Player {
+  float x, y, w, h;
+  float yVel = 0;
+  float gravity = 0.6;
+
+  float jumpPower = -12;
+  float doubleJumpPower = -10;
+
+  int jumpsLeft = 2;
+
+  Player(float x, float y, float w, float h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+  }
+
+  void update() {
+    y += yVel;
+    yVel += gravity;
+
+    if (y + h >= groundY) {
+      y = groundY - h;
+      yVel = 0;
+      jumpsLeft = 2;
+    }
+  }
+
+  void jump() {
+    if (jumpsLeft > 0) {
+      yVel = (jumpsLeft == 2 ? jumpPower : doubleJumpPower);
+      jumpsLeft--;
+    }
+  }
+
+  void display() {
+    fill(0, 0, 255);
+    rect(x, y, w, h);
+  }
+
+  boolean collidesWith(Coin c) {
+    float dx = c.x - (x + w/2);
+    float dy = c.y - (y + h/2);
+    float distSq = dx*dx + dy*dy;
+    float radius = c.r + w/2;
+    return distSq < radius * radius;
+  }
+}
