@@ -1,5 +1,3 @@
-// MainSketch.pde  (MAIN FILE)
-
 int W = 800;
 int H = 400;
 
