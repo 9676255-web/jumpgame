@@ -1,4 +1,4 @@
-JUMPGAME    
+JUMPYRUNNER  
 
 Team Members:
 Xadian Butcher, the artist and leader, responsible for all the images and backgrounds.
