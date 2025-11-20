@@ -1,0 +1,24 @@
+class Coin {
+  float x, y, r;
+
+  Coin(float x, float y, float r) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+  }
+
+  void display() {
+    float angle = radians(frameCount * 6);
+    pushMatrix();
+    translate(x, y);
+    rotateY(angle);
+
+    fill(255, 200, 0);
+    ellipse(0, 0, r*2, r*2);
+
+    fill(255, 230, 80);
+    ellipse(0, 0, r*1.4, r*1.4);
+
+    popMatrix();
+  }
+}
