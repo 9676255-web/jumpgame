@@ -1,0 +1,102 @@
+String state = "start";  
+int groundY;
+
+Player player;
+ArrayList<Enemy> enemies;
+ArrayList<Coin> coins;
+
+int spawnTimer = 0;
+int coinSpawnTimer = 0;
+
+int spawnInterval = 120;
+int coinSpawnInterval = 90;
+
+int score = 0;
+int highScore = 0;
+
+float gameSpeed = 4;
+
+
+void setup() {
+  size(500, 500);
+  textAlign(CENTER, CENTER);
+  rectMode(CORNER);
+  ellipseMode(CENTER);
+  smooth();
+
+  groundY = height - 60;
+  resetGame();
+}
+
+void draw() {
+  background(80, 180, 230);
+  drawGround();
+
+  switch(state) {
+
+    case "start":
+      drawStartScreen();
+      break;
+
+    case "menu":
+      drawMenuScreen();
+      break;
+
+    case "settings":
+      drawSettingsScreen();
+      break;
+
+    case "playing":
+      updateGame();
+      drawGame();
+      break;
+
+    case "pause":
+      drawGame();
+      drawPauseScreen();
+      break;
+
+    case "gameover":
+      drawGame();
+      drawGameOver();
+      break;
+
+    case "stats":
+      drawStatsScreen();
+      break;
+  }
+}
+
+void keyPressed() {
+  // Global screen-changing hotkeys
+  if (key == 's') state = "start";
+  if (key == 'm') state = "menu";
+  if (key == 't') state = "settings";
+  if (key == 'p') state = "playing";
+  if (key == 'u') state = "pause";
+  if (key == 'g') state = "gameover";
+  if (key == 'a') state = "stats";
+
+  // Gameplay input
+  if (state.equals("start")) {
+    if (key == ' ' || keyCode == UP) state = "playing";
+
+  } else if (state.equals("playing")) {
+    if (key == ' ' || keyCode == UP) player.jump();
+
+  } else if (state.equals("gameover")) {
+    if (key == 'r' || key == 'R') {
+      resetGame();
+      state = "playing";
+    }
+  }
+}
+
+void mousePressed() {
+  if (state.equals("start")) state = "playing";
+  else if (state.equals("playing")) player.jump();
+  else if (state.equals("gameover")) {
+    resetGame();
+    state = "playing";
+  }
+}
