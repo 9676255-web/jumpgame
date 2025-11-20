@@ -1,5 +1,3 @@
-// Game.pde - Globals, game logic, and object classes
-
 Player player;
 ArrayList<Enemy> enemies;
 ArrayList<Coin> coins;
