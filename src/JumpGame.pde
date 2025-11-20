@@ -8,7 +8,6 @@ Player player;
 ArrayList<Coin> coins;
 ArrayList<Enemy> enemies;
 
-// -------------------------------------------------------------------
 
 void setup() {
   size(500,500);
@@ -60,10 +59,6 @@ void draw() {
   }
 }
 
-// -------------------------------------------------------------------
-// INPUT HANDLING
-// -------------------------------------------------------------------
-
 void keyPressed() {
 
   // Global hotkeys (override)
@@ -99,10 +94,6 @@ void mousePressed() {
   }
 }
 
-// -------------------------------------------------------------------
-// DRAWING
-// -------------------------------------------------------------------
-
 void drawGround() {
   fill(120, 80, 40);
   rect(0, groundY, width, height - groundY);
@@ -120,10 +111,6 @@ void drawGame() {
   textAlign(LEFT, TOP);
   text("Score: " + score, 10, 10);
 }
-
-// -------------------------------------------------------------------
-// NEW SCREENS
-// -------------------------------------------------------------------
 
 void drawStartScreen() {
   fill(0, 150);
@@ -219,10 +206,6 @@ void drawStatsScreen() {
   textSize(20);
   text("Press M for Menu", width/2, height - 40);
 }
-
-// -------------------------------------------------------------------
-// EXISTING GAME LOGIC (unchanged)
-// -------------------------------------------------------------------
 
 void resetGame() {
   score = 0;
