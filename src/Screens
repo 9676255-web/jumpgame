@@ -6,10 +6,33 @@ void drawGround() {
 }
 
 void drawGame() {
+
+  // COINS
   for (Coin c : coins) c.display();
+
+  // ENEMIES
   for (Enemy e : enemies) e.display();
+
+  // PLAYER
   player.display();
 
+  // PARTICLES
+  for (int i = deathParticles.size()-1; i >= 0; i--) {
+    Particle p = deathParticles.get(i);
+    p.update();
+    p.display();
+    if (p.dead()) deathParticles.remove(i);
+  }
+
+  // SPAWN INDICATOR (only last 60 frames)
+  if (indicatorFramesLeft > 0) {
+    stroke(255, 0, 0);
+    strokeWeight(3);
+    line(nextSpawnX, 0, nextSpawnX, height);
+    noStroke();
+  }
+
+  // SCORE
   fill(0);
   textSize(24);
   textAlign(LEFT, TOP);
