@@ -3,23 +3,35 @@ void resetGame() {
 
   enemies = new ArrayList<Enemy>();
   coins = new ArrayList<Coin>();
+  deathParticles = new ArrayList<Particle>();
 
   score = 0;
   spawnTimer = 0;
   coinSpawnTimer = 0;
+  gameSpeed = 4;
 
   spawnInterval = 120;
   coinSpawnInterval = 90;
 
-  gameSpeed = 4;
+  indicatorFramesLeft = 0;
 }
 
 void updateGame() {
 
   gameSpeed = 4 + score * 0.07;
 
+  // ENEMY SPAWN TIMER
   spawnTimer++;
 
+  // show indicator last 60 frames
+  if (spawnTimer >= spawnInterval - 60) {
+    nextSpawnX = width + 40;
+    indicatorFramesLeft = spawnInterval - spawnTimer;
+  } else {
+    indicatorFramesLeft = 0;
+  }
+
+  // SPAWN ENEMY
   if (spawnTimer >= spawnInterval) {
     spawnTimer = 0;
 
@@ -40,20 +52,21 @@ void updateGame() {
   }
 
 
+  // COIN SPAWN
   coinSpawnTimer++;
   if (coinSpawnTimer >= coinSpawnInterval) {
     coinSpawnTimer = 0;
-
     float cy = groundY - 80 - random(0, 150);
     coins.add(new Coin(width + 20, cy, 12));
-
     coinSpawnInterval = max(40, int(90 - score * 0.3));
   }
 
 
+  // UPDATE PLAYER
   player.update();
 
 
+  // UPDATE ENEMIES
   for (int i = enemies.size()-1; i >= 0; i--) {
     Enemy e = enemies.get(i);
     e.update();
@@ -65,11 +78,13 @@ void updateGame() {
     }
 
     if (e.collidesWith(player)) {
+      spawnDeathParticles(player.x + player.w/2, player.y + player.h/2);
       state = "gameover";
       highScore = max(highScore, score);
     }
   }
 
+  // UPDATE COINS
   for (int i = coins.size()-1; i >= 0; i--) {
     Coin c = coins.get(i);
     c.x -= gameSpeed * 0.8;
