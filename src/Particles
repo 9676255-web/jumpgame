@@ -1,0 +1,36 @@
+class Particle {
+  float x, y;
+  float vx, vy;
+  float life;
+
+  Particle(float x, float y) {
+    this.x = x;
+    this.y = y;
+    vx = random(-3, 3);
+    vy = random(-4, -1);
+    life = 40;
+  }
+
+  void update() {
+    x += vx;
+    y += vy;
+    vy += 0.2;
+    life--;
+  }
+
+  void display() {
+    noStroke();
+    fill(255, 200, 0, life * 6);
+    ellipse(x, y, 8, 8);
+  }
+
+  boolean dead() {
+    return life <= 0;
+  }
+}
+
+void spawnDeathParticles(float px, float py) {
+  for (int i = 0; i < 30; i++) {
+    deathParticles.add(new Particle(px, py));
+  }
+}
