@@ -1,4 +1,4 @@
-// STATE
+// Joey Zheng | Xadian Butcher 2025 GameDev 1
 String state = "start";
 
 int groundY;
