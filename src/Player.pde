@@ -6,7 +6,7 @@ class Player {
   float jumpPower = -12;       // Strength of the first jump
   float doubleJumpPower = -10; // Strength of the second jump
 
-  int jumpsLeft = 2;     // Player starts with 2 jumps (double jump system)
+  int jumpsLeft = 3;     // Player starts with 2 jumps (double jump system)
 
   Player(float x, float y, float w, float h) { // Constructor sets up player
     this.x = x;          // Starting x position
@@ -23,7 +23,7 @@ class Player {
     if (y + h >= groundY) { // If bottom of player touches or passes ground
       y = groundY - h;      // Snap player to ground position
       yVel = 0;             // Reset vertical velocity
-      jumpsLeft = 2;        // Restore double jump
+      jumpsLeft = 3;        // Restore double jump
     }
   }
 
